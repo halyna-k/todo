@@ -1,5 +1,5 @@
 
-export type TaskStatusProps = 'TO DO' | 'IN PROGRESS' | 'COMPLETED';
+export type TaskStatusProps = 'TODO' | 'IN_PROGRESS' | 'COMPLETED';
 
 export interface TaskProps {
   user_id?: string;
