@@ -19,3 +19,11 @@ export const ContainerLayout: React.FC<ContainerProps> = ({ children }) => {
     </div>
   );
 };
+
+export const Container: React.FC<ContainerProps> = ({ children, customStyles }) => {
+  return (
+    <div className={`flex justify-center items-center p-5 ${customStyles}`}>
+      {children}
+    </div>
+  );
+};
