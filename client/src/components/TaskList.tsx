@@ -32,7 +32,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
           </div>
           <div className="p-4 flex-1 overflow-y-auto max-h-[500px]">
             {tasks.map((task) => (
-              column.title === task.status && (
+              column.title.replace(/\s/g, "").toUpperCase() === task.status.replace(/\s/g, "").toUpperCase() && (
                 <TaskCard
                   key={task.id}
                   task={task}
