@@ -15,16 +15,15 @@ const Header: React.FC<HeaderProps> = ({ searchQuery, handleSearchChange }) => {
   return (
     <header className="py-4 border-b-1 border-b-gray-300">
       <div className="max-w-4xl mx-auto flex justify-between items-center px-4">
-          <Link to="/" className="text-xl font-bold">ToDo</Link>
+        <Link to="/" className="text-xl font-bold text-cyan-300">ToDo</Link>
         {isAuthenticated &&
-          <>
-          <nav className="flex items-center gap-3">
-            <Link to="/dashboard">Board</Link>
-          </nav>
-            <SearchBar value={searchQuery} onChange={handleSearchChange} />
-          </>
+          <div className="flex gap-70">
+            <nav className="flex items-center gap-3">
+              <Link to="/dashboard" className="text-lg">Board</Link>
+            </nav>
+              <SearchBar value={searchQuery} onChange={handleSearchChange} />
+          </div>
         }
-
         <Auth />
       </div>
     </header>

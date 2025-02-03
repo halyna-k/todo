@@ -7,7 +7,7 @@ const Home = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
    return (
-     <Container customStyles="h-[90%] rounded-3xl relative overflow-hidden">
+     <Container customStyles="h-[90%] rounded-b-3xl relative overflow-hidden">
       <Hero>
         {isAuthenticated ? (
           <Button

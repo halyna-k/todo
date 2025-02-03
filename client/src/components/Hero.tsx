@@ -27,8 +27,10 @@ const Hero: React.FC<HeroProps> = ({ children }) => {
             Stay Organized. Achieve More.
           </h1>
           <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">
-           Plan, track, and complete your tasks with ease.Stay organized and boost your productivity  Secure & simple—your tasks, your way. Start today!
-             </p>
+            Stay organized and boost your productivity.
+            Secure & simple—your tasks, your way.
+            Start today!
+          </p>
         </div>
           {children}
       </div>
