@@ -4,3 +4,4 @@ export { default as Footer } from "./Footer";
 export { AuthButton, Button } from "./Button";
 export { ContainerLayout, Container } from './Container';
 export { default as Hero } from "./Hero";
+export { default as SearchBar } from "./SearchBar";

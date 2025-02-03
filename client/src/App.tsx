@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -8,13 +8,17 @@ import { ContainerLayout, Footer, Header } from "./components";
 const queryClient = new QueryClient();
 
 export default function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <ContainerLayout>
-          <Header />
+          <Header searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={
