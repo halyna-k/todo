@@ -1,0 +1,54 @@
+services:
+  client:
+    build: ./client
+    ports:
+      - "3000:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_AUTH0_DOMAIN=dev-lx086ccp2k4ka8t7.us.auth0.com
+      - VITE_AUTH0_CLIENT_ID=H334wzrTXiIRkD5GaZePjLQyzH5g5ghG
+      - VITE_AUTH0_CLIENT_SECRET=UJN3djA00UvnBnCR3QaAfE-mkanARvEgdTY_t0N193sCurH1OyQFK-PIBVdQkRZE
+      - VITE_AUTH0_AUDIENCE=https://dev-lx086ccp2k4ka8t7.us.auth0.com/api/v2/
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    environment:
+      - DB_USER=postgres
+      - DB_HOST=postgres
+      - DB_DATABASE=todo
+      - DB_PASSWORD=36LOIK3Cah20
+      - DB_PORT=5432
+
+      - AUTH0_DOMAIN=dev-lx086ccp2k4ka8t7.us.auth0.com
+      - AUTH0_CLIENT_ID=H334wzrTXiIRkD5GaZePjLQyzH5g5ghG
+      - AUTH0_CLIENT_SECRET =UJN3djA00UvnBnCR3QaAfE-mkanARvEgdTY_t0N193sCurH1OyQFK-PIBVdQkRZE
+      - AUTH0_AUDIENCE=https://dev-lx086ccp2k4ka8t7.us.auth0.com/api/v2/
+
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
