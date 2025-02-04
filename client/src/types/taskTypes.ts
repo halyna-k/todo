@@ -5,17 +5,13 @@ export interface TaskProps {
   user_id?: string;
   id: number;
   title: string;
-  description?: string;
+  description: string;
   deadline?: string;
   status: TaskStatusProps | string;
 }
 
 export interface TaskCardProps {
   task: TaskProps;
-  // onDelete: (taskId: string) => void;
-  // onDrop: (taskId: string, newStatus: string) => void;
-  // onStatusChange: () => void;
-  // updateTaskStatus: (taskId: string, newStatus: string) => void;
 }
 
 
@@ -35,8 +31,6 @@ export interface TaskFormProps {
 export interface TaskListProps {
   tasks: TaskProps[];
   status?: TaskStatusProps | string;
-  // onDelete: (taskId: string) => Promise<void>;
-  // onStatusChange: (task: TaskProps, newStatus: TaskStatusProps) => void;
 }
 
 export interface TaskManagementProps {
