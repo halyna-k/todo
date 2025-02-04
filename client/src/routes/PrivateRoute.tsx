@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Spinner } from "../components";
 
 type PrivateRouteProps = {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 
   if (isLoading) {
     // optionally render a loading spinner while auth status is loading
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (!isAuthenticated) {

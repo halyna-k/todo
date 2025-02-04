@@ -6,6 +6,7 @@ export { ContainerLayout, Container } from './Container';
 export { default as Hero } from "./Hero";
 export { default as SearchBar } from "./SearchBar";
 export { default as ErrorBoundary } from "./ErrorBoundary";
+export { default as Spinner } from "./Spinner";
 
 export { default as TaskCard } from "./TaskCard";
 export { default as TaskForm } from "./TaskForm";
