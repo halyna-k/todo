@@ -8,6 +8,8 @@ dotenv.config();
 // middleware to check JWT and attach user info to the request
 export const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
     jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
   }),
   audience: process.env.AUTH0_AUDIENCE,
@@ -36,7 +38,7 @@ export const authenticateUser = (req: Request, res: Response, next: NextFunction
     res.status(401).send({ message: "Unauthorized: User ID not found in token" });
   }
 
-  req.body.user_id = user.sub; 
+  req.body.user_id = user.sub;
   console.log("Request body after adding user_id:", req.body);
 
   next();
