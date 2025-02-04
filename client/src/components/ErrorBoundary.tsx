@@ -26,7 +26,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
 
   if (hasError) {
     return (
-      <Container>
+      <Container customStyles="flex justify-center mt-20">
         <h1 className="mt-10">Something went wrong. Please try later.</h1>
       </Container>
     );
