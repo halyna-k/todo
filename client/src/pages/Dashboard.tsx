@@ -1,4 +1,5 @@
-import { Container, TaskManagement } from "../components";
+import { Container, Spinner, TaskManagement } from "../components";
+import useGetTasks from "../hooks/useGetTasks";
 
 const DUMMY_DATA = [
    { user_id: "1", id: 1, title: "Task 1", description: "This is task 1", deadline: "01/03/2025", status: "TO DO" },
@@ -12,10 +13,22 @@ const DUMMY_DATA = [
    { user_id: "9", id: 9, title: "Task 9", description: "This is task 9", deadline: "10/03/2025", status: "TO DO" },
  ]
 
-const Dashboard = () => {
+const Dashboard: React.FC<{ searchResults: any[] }> = ({ searchResults }) => {
+  const { data: tasks, isLoading, isError, error } = useGetTasks();
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <div>{`Error fetching tasks: ${error instanceof Error ? error.message : 'Unknown error'}`}</div>;
+  }
+
+  const displayedTasks = searchResults.length > 0 ? searchResults : tasks ?? [];
+
   return (
     <Container>
-      <TaskManagement tasks={DUMMY_DATA || []} />
+      <TaskManagement tasks={DUMMY_DATA || displayedTasks} />
     </Container>
   );
 }
