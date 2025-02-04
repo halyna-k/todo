@@ -1,38 +1,48 @@
 import { Suspense, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Dashboard, Home } from "./pages";
 import { ContainerLayout, ErrorBoundary, Footer, Header, Spinner } from "./components";
-
-const queryClient = new QueryClient();
+import useSearchTasks from "./hooks/useSearchTasks";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("")
+  const { data: tasks } = useSearchTasks(searchQuery);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
+   ;
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      setSearchTerm(searchQuery);
+      }
+    };
 
   return (
-    <QueryClientProvider client={queryClient}>
+
       <Router>
-        <Suspense fallback={<Spinner/>}>
-        <ErrorBoundary>
-          <ContainerLayout>
-          <Header searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-              } />
-            </Routes>
+        <Suspense fallback={<Spinner />}>
+          <ErrorBoundary>
+            <ContainerLayout>
+              <Header searchQuery={searchQuery} onSearchChange={handleSearchChange} onSearchKeyDown={handleSearchKeyDown} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <PrivateRoute>
+                      <Dashboard searchResults={tasks ?? []} />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
             </ContainerLayout>
             <Footer />
           </ErrorBoundary>
         </Suspense>
       </Router>
-    </QueryClientProvider>
   );
 }
