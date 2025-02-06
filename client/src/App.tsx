@@ -7,7 +7,6 @@ import useSearchTasks from "./hooks/useSearchTasks";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchTerm, setSearchTerm] = useState("")
   const { data: tasks } = useSearchTasks(searchQuery);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,12 +16,11 @@ export default function App() {
 
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
-      setSearchTerm(searchQuery);
+      setSearchQuery(searchQuery);
       }
     };
 
   return (
-
       <Router>
         <Suspense fallback={<Spinner />}>
           <ErrorBoundary>

@@ -10,7 +10,7 @@ const Auth: React.FC = () => {
       {isAuthenticated ? (
         <AuthButton
           text={user?.name}
-          onClick={() => logout({ returnTo: window.location.origin })}
+          onClick={() => logout({ logoutParams: { returnTo:  window.location.origin } })}
           customStyles="text-gray-900"
         />
       ) : (
