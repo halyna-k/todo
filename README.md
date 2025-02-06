@@ -12,7 +12,7 @@ A simple Todo app with a React frontend, Node.js backend, and PostgreSQL databas
 
 2. **Run the application:**
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. **Access the app:**
@@ -21,7 +21,7 @@ A simple Todo app with a React frontend, Node.js backend, and PostgreSQL databas
 
 4. **Stop the application:**
    ```bash
-   docker-compose down
+   docker compose down
    ```
 
 Make sure `.env` files are properly set up before running. 🚀

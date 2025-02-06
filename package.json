@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "A simple Todo app with a React frontend, Node.js backend, and PostgreSQL database.",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && tsc -b && vite build",
+    "test": "cd client && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halyna-k/todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/halyna-k/todo/issues"
+  },
+  "homepage": "https://github.com/halyna-k/todo#readme"
+}

@@ -3,3 +3,8 @@ dist
 build
 .git
 .env
+.drone.yml
+.gitignore
+Dockerfile
+README.md
+docker-compose.yml
