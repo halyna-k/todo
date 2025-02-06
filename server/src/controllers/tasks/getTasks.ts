@@ -3,11 +3,10 @@ import pool from '../../db';
 
 const getTasks = async (req: Request, res: Response) => {
   try {
-    // pass the user_id to filter tasks for the authenticated user
+    // make the request to get all tasks
     const tasks = await pool.query(
       'SELECT * FROM tasks'
     );
-
     // respond tha data with all tasks
     res.json(tasks.rows);
   } catch (err) {

@@ -2,10 +2,11 @@ import { Request, Response } from 'express';
 import pool from '../../db';
 
 const searchTasks = async (req: Request, res: Response): Promise<void> => {
-  const userId = req.body.user_id;
+  const userId = (req as any).authUser?.user_id;
 
   if (!userId) {
     res.status(400).send({ message: 'User ID is required' });
+    return
   }
 
   try {
