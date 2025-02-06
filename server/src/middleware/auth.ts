@@ -1,23 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import dotenv from "dotenv";
-import jwksRsa from 'jwks-rsa';
-var { expressjwt: jwt } = require("express-jwt");
+import { auth } from 'express-oauth2-jwt-bearer';
 
 dotenv.config();
 
 // middleware to check JWT and attach user info to the request
-export const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-  }),
+export const checkJwt = auth({
   audience: process.env.AUTH0_AUDIENCE,
-  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ['RS256'],
-  requestProperty: "user",
-}).unless({
-  path: ['/tasks'],
+  issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
+  tokenSigningAlg: 'RS256',
 });
 
 // error handler for unauthorized access
@@ -31,15 +22,14 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
 
 // middleware to attach user ID to the request
 export const authenticateUser = (req: Request, res: Response, next: NextFunction): void => {
-  const user = (req as any).user as { sub: string };
+  const user = req.auth?.payload;
 
   if (!user || !user.sub) {
     console.error('User ID not found in token:', user);
-    res.status(401).send({ message: "Unauthorized: User ID not found in token" });
+    res.status(401).json({ message: "Unauthorized: User ID not found" });
+    return
   }
 
-  req.body.user_id = user.sub;
-  console.log("Request body after adding user_id:", req.body);
-
+  (req as any).authUser = { user_id: user.sub };
   next();
 };
