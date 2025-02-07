@@ -5,7 +5,7 @@ const getTasks = async (req: Request, res: Response) => {
   try {
     // make the request to get all tasks
     const tasks = await pool.query(
-      'SELECT * FROM tasks'
+      'SELECT * FROM tasks ORDER BY deadline ASC'
     );
     // respond tha data with all tasks
     res.json(tasks.rows);
