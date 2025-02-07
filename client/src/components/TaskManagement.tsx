@@ -11,8 +11,8 @@ const TaskManagement: React.FC<TaskManagementProps> = ({ tasks }) => {
   const { mutate: createTaskMutation } = useCreateTask();
 
   useEffect(() => {
-  console.log('Filtered tasks changed:', filteredTasks);
-}, [filteredTasks]);
+    setFilteredTasks(tasks);
+  }, [tasks]);
 
   const handleAddTask = () => {
     setIsFormOpen(true);
