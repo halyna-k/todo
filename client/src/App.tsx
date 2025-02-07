@@ -4,21 +4,23 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { Dashboard, Home } from "./pages";
 import { ContainerLayout, ErrorBoundary, Footer, Header, Spinner } from "./components";
 import useSearchTasks from "./hooks/useSearchTasks";
+import useDebounce from "./hooks/useDebounce";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { data: tasks } = useSearchTasks(searchQuery);
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+  useSearchTasks(debouncedSearchQuery);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
-   ;
 
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchQuery.trim()) {
       setSearchQuery(searchQuery);
-      }
-    };
+      setSearchQuery('');
+    }
+  };
 
   return (
       <Router>
@@ -32,7 +34,7 @@ export default function App() {
                   path="/dashboard"
                   element={
                     <PrivateRoute>
-                      <Dashboard searchResults={tasks ?? []} />
+                      <Dashboard searchQuery={debouncedSearchQuery} />
                     </PrivateRoute>
                   }
                 />
