@@ -1,4 +1,3 @@
-
 export type TaskStatusProps = 'TODO' | 'IN_PROGRESS' | 'COMPLETED';
 
 export interface TaskProps {
@@ -13,7 +12,6 @@ export interface TaskProps {
 export interface TaskCardProps {
   task: TaskProps;
 }
-
 
 export interface TaskFormProps {
   initialData?: {
