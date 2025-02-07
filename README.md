@@ -2,6 +2,17 @@
 
 A simple Todo app with a React frontend, Node.js backend, and PostgreSQL database.
 
+Features:
+   React for the frontend
+   Node.js for the backend API
+   PostgreSQL for the database
+   Docker for containerization
+
+Prerequisites:
+   Before running the application, make sure you have the following installed:
+   Docker
+   Docker Compose
+
 ## Setup
 
 1. **Clone the repository:**
@@ -10,9 +21,17 @@ A simple Todo app with a React frontend, Node.js backend, and PostgreSQL databas
    cd todo
    ```
 
-2. **Run the application:**
+2. **Set up environment variables:**
+   - Copy the example environment file to .env:
    ```bash
-   docker compose up --build
+   cp .env.example .env
+   ```
+   - Edit the .env file with your specific configuration (e.g., database credentials).
+
+
+3. **Run the application:**
+   ```bash
+   docker compose --env-file .env up --build
    ```
 
 3. **Access the app:**
@@ -23,5 +42,10 @@ A simple Todo app with a React frontend, Node.js backend, and PostgreSQL databas
    ```bash
    docker compose down
    ```
+Folder Structure:
+   client/ - React frontend source code.
+   server/ - Node.js backend source code.
+   .env.example - Sample environment configuration file.
+   docker-compose.yml - Docker Compose configuration file.
 
 Make sure `.env` files are properly set up before running. 🚀
