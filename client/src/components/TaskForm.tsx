@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { TaskFormProps } from '../types/taskTypes';
 import { Button } from './Button';
+import { TaskFormProps } from '../types/taskTypes';
 
-const TaskForm: React.FC<TaskFormProps> = (props) => {
-  const { onSubmit, onClose, } = props;
+const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onClose }) => {
   const initialData = { id: 0, title: "", description: "", deadline: "", status: "TODO" };
   const [taskData, setTaskData] = useState(initialData);
 
@@ -24,11 +23,11 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
 
   const handleSubmit = () => {
     onSubmit({
-      ...taskData, status: 'TODO',
+      ...taskData,
+      status: 'TODO',
     });
     setTaskData(initialData);
   };
-
 
   return (
     <div className={`fixed inset-0 bg-gray-500/75 flex justify-center items-center`}>

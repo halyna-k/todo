@@ -13,7 +13,7 @@ if (!domain || !clientId) {
   throw new Error("Auth0 domain and clientId must be provided in .env");
 }
 
- const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -7,7 +7,7 @@ const useCreateTask = () => {
   const { getAccessTokenSilently } = useAuth0();
   const queryClient = useQueryClient();
 
-  return useMutation<TaskProps, Error, TaskDataProps>(
+  const mutation = useMutation<TaskProps, Error, TaskDataProps>(
     async (taskData) => {
       const token = await getAccessTokenSilently();
       return createTask(taskData, token);
@@ -21,6 +21,8 @@ const useCreateTask = () => {
       },
     }
   );
+
+  return mutation;
 };
 
 export default useCreateTask;

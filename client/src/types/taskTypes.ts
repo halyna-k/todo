@@ -39,4 +39,5 @@ export interface TaskManagementProps {
 export interface TaskDataProps {
   title: string;
   description: string;
+  status?: TaskStatusProps | string;
 }
