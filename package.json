@@ -4,8 +4,6 @@
   "description": "A simple Todo app with a React frontend, Node.js backend, and PostgreSQL database.",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && tsc -b && vite build",
-    "test": "cd client && jest"
   },
   "repository": {
     "type": "git",
