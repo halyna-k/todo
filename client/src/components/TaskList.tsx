@@ -11,7 +11,6 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }) => {
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    e.dataTransfer;
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TaskFormProps } from '../types/taskTypes';
 import { Button } from './Button';
 
@@ -6,6 +6,13 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
   const { onSubmit, onClose, } = props;
   const initialData = { id: 0, title: "", description: "", deadline: "", status: "TODO" };
   const [taskData, setTaskData] = useState(initialData);
+
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    setMinDate(today);
+  }, []);
+
+  const [minDate, setMinDate] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,7 +32,7 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
 
   return (
     <div className={`fixed inset-0 bg-gray-500/75 flex justify-center items-center`}>
-      <div className="relative bg-white p-8 rounded-xl shadow-md max-w-full w-96 lg:w-1/3 xl:w-1/4">
+      <div className="relative bg-white border-1 border-cyan-100 p-8 rounded-xl shadow-md max-w-full w-96 lg:w-1/3 xl:w-1/4">
         <button onClick={onClose} className="absolute top-5 right-7 text-gray-500 hover:text-gray-700 text-2xl">
           &times;
         </button>
@@ -52,6 +59,8 @@ const TaskForm: React.FC<TaskFormProps> = (props) => {
           <input
             type="date"
             name="deadline"
+            lang="en"
+            min={minDate}
             value={taskData.deadline}
             onChange={handleChange}
             className="p-2 border border-gray-300 text-grey-400 text-sm rounded-xl w-full"

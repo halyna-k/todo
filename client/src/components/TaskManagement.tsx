@@ -37,7 +37,7 @@ const TaskManagement: React.FC<TaskManagementProps> = ({ tasks }) => {
       ) : (
         <button
           onClick={handleAddTask}
-          className="absolute right-1 bottom-0 rounded-4xl bg-cyan-300 text-white shadow-xs hover:bg-cyan-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+          className="absolute right-7 bottom-0 rounded-4xl bg-cyan-200 text-white shadow-xs hover:bg-cyan-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
         >
           <CirclePlusIcon size={50} />
         </button>
