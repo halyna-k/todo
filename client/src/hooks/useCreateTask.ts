@@ -1,16 +1,26 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { useAuth0 } from '@auth0/auth0-react';
 import createTask from '../services/createTask';
-import { TaskDataProps, TaskProps } from '../types/taskTypes';
+import { TaskProps, TaskDataProps } from '../types/taskTypes';
 
 const useCreateTask = () => {
-  return useMutation<TaskProps, Error, TaskDataProps>(createTask, {
-    onError: (error) => {
-      console.error('Error creating task:', error);
+  const { getAccessTokenSilently } = useAuth0();
+  const queryClient = useQueryClient();
+
+  return useMutation<TaskProps, Error, TaskDataProps>(
+    async (taskData) => {
+      const token = await getAccessTokenSilently();
+      return createTask(taskData, token);
     },
-    onSuccess: (data) => {
-      console.log('Task created successfully:', data);
-    },
-  });
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('tasks');
+      },
+      onError: (error) => {
+        console.error('Error creating task:', error);
+      },
+    }
+  );
 };
 
 export default useCreateTask;
