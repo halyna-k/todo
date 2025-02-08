@@ -4,14 +4,14 @@ import { auth } from 'express-oauth2-jwt-bearer';
 
 dotenv.config();
 
-// middleware to check JWT and attach user info to the request
+// Middleware to check JWT and attach user info to the request
 export const checkJwt = auth({
   audience: process.env.AUTH0_AUDIENCE,
   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
   tokenSigningAlg: 'RS256',
 });
 
-// error handler for unauthorized access
+// Error handler for unauthorized access
 export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   if (err.name === 'UnauthorizedError') {
     return res.status(401).send({ message: 'Invalid or expired token' });
@@ -20,7 +20,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
   res.status(500).send({ message: 'Something went wrong!' });
 };
 
-// middleware to attach user ID to the request
+// Middleware to attach user ID to the request
 export const authenticateUser = (req: Request, res: Response, next: NextFunction): void => {
   const user = req.auth?.payload;
 
