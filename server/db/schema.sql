@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS tasks (
   description TEXT NOT NULL,
   deadline DATE NOT NULL,
   status task_status DEFAULT 'TODO',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert sample data, where user_id is not specified
