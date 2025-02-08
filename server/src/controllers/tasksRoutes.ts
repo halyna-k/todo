@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/', authenticateUser, createTask);
 router.get('/', getTasks);
 router.get('/search', authenticateUser, searchTasks);
-router.patch("/status", authenticateUser, updateTaskStatus);
+router.patch('/:id/status', authenticateUser, updateTaskStatus);
 
 export default router;
