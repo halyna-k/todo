@@ -14,12 +14,8 @@ export interface TaskCardProps {
 }
 
 export interface TaskFormProps {
-  initialData?: {
-    id: number,
-    title: string;
-    description: string;
-    deadline: string;
-    status: 'TODO' | 'IN_PROGRESS' | 'COMPLETED';
+  taskData: {
+    initialData?: TaskProps;
   };
   onSubmit: (task: TaskProps) => void;
   onClose: () => void;
