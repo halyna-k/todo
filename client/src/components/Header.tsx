@@ -14,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ searchQuery, onSearchChange, onSearchKe
   const { isAuthenticated } = useAuth0();
 
   return (
-    <header className="py-4 border-b-1 border-b-gray-300">
-      <div className="max-w-4xl mx-auto flex justify-between items-center px-4">
+    <header className="py-4 px-6 border-b-1 border-b-gray-300">
+      <div className="flex justify-between items-center px-4">
         <Link to="/" className="text-xl font-bold text-cyan-300">ToDo</Link>
         {isAuthenticated && (
           <div className="flex gap-70">
